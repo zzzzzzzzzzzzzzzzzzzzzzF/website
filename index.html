@@ -65,7 +65,7 @@
 
 	<script>
 
-		document.body.querySelector(".menu").querySelector(".staticMenu").classList.add("hidden");
+		document.body.querySelector(".staticMenu").classList.add("hidden");
 		
 		(renderMenu = function() {
 
@@ -87,33 +87,17 @@
 
 					var renderDelayInterval = 50;
 
-					(function (i) {	
-
-						setTimeout(
-
-							() => menuElement.innerText = "[ " + menuElementName.slice(0, i) + " ]"
-
-						, i*renderDelayInterval);
-
+					(function (i) {
+						setTimeout(() => menuElement.innerText = "[ " + menuElementName.slice(0, i) + " ]", i*renderDelayInterval);
 					})(i);
 
 					if (i===menuElementName.length) {
-
-						setTimeout(
-							
-							() => {
-						
-								menuElement.innerText = "";
-								menuElement.appendChild(url);
-
-							}
-
-						, (i+1)*renderDelayInterval);
+						setTimeout(() => menuElement.replaceChild(url, menuElement.firstChild), (i+1)*renderDelayInterval);
 					}
 				}
 			}
 
-			for (var i=0; i < urls.length; i++) setTimeout(renderMenuElement, (i+1)*250);
+			for (var i = 0; i < urls.length; i++) setTimeout(renderMenuElement, (i+1)*250);
 
 			menu.removeChild(menu.querySelector(".staticMenu"));
 
