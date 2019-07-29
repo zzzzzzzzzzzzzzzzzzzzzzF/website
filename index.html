@@ -85,18 +85,31 @@
 
 				for (var i = 0; i < menuElementName.length+1; i++) {
 
+					var renderDelayInterval = 50;
+
 					(function (i) {	
 
-						setTimeout(() => menuElement.innerText = "[ " + menuElementName.slice(0, i) + " ]", i*40);
+						setTimeout(
+
+							() => menuElement.innerText = "[ " + menuElementName.slice(0, i) + " ]"
+
+						, i*renderDelayInterval);
 
 					})(i);
 
-					if (i===menuElementName.length) setTimeout(() => {
-						
-						menuElement.innerText = "";
-						menuElement.appendChild(url);
+					if (i===menuElementName.length) {
 
-					}, (i+2)*40);
+						setTimeout(
+							
+							() => {
+						
+								menuElement.innerText = "";
+								menuElement.appendChild(url);
+
+							}
+
+						, (i+1)*renderDelayInterval);
+					}
 				}
 			}
 
