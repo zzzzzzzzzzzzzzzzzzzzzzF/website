@@ -8,6 +8,7 @@
 		
 		<style>
 			@import url("https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap");
+
 			body {
 				font-family: "Roboto Mono", monospace;
 				font-size: 1.5vw;
@@ -69,50 +70,39 @@
 		(renderMenu = function() {
 
 			var menu = document.body.querySelector(".menu");
-			var links = menu.querySelectorAll("a");
+			var urls = menu.querySelectorAll("a");
+			var menuElementIndexCounter = 0;
 
-			var renderMenuItem = function(name, link) {
+			var renderMenuElement = function() {
 
-				var menuItemElement = document.createElement("div");
+				var menuElementIndex = menuElementIndexCounter++;
+				var url = urls[menuElementIndex];
+				var menuItemName = url.querySelector("span").textContent;
+				
+				var menuElement = document.createElement("div");
 
-				var beforeNameElement = document.createElement("span");
-				var nameElement = document.createElement("span");
-				var afterNameElement = document.createElement("span");
+				menu.appendChild(menuElement);
 
-				var linkElement =  document.createElement("a");
+				for (var i = 0; i < menuItemName.length+1; i++) {
 
-				beforeNameElement.textContent = "[ ";
-				afterNameElement.textContent = " ]";
-
-				linkElement.text = name;
-				linkElement.href = link;
-				linkElement.classList.add("decorated");
-
-				menuItemElement.appendChild(beforeNameElement);
-				menuItemElement.appendChild(nameElement);
-				menuItemElement.appendChild(afterNameElement);
-
-				menu.insertBefore(menuItemElement, menu.querySelector(".staticMenu"));
-
-				for (var i = 1; i<name.length+1; i++) {
 					(function (i) {	
-						setTimeout(() => nameElement.innerText = name.slice(0, i), i*40);
+
+						setTimeout(() => menuElement.innerText = "[ " + menuItemName.slice(0, i) + " ]", i*40);
+
 					})(i);
 
-					if (i===name.length) setTimeout(() => {
-						nameElement.innerText = "";
-						nameElement.appendChild(linkElement);
+					if (i===menuItemName.length) setTimeout(() => {
+						
+						menuElement.innerText = "";
+						menuElement.appendChild(url);
+
 					}, (i+2)*40);
 				}
 			}
 
-			for (var i=0; i<links.length; i++)
-				(function(name, link) {
-					setTimeout(
-						() => renderMenuItem(name, link)
-					,(i+1)*250)
-				})(links[i].querySelector(".decorated").textContent, links[i].href);
-
+			for (var i=0; i < urls.length; i++)
+			
+				setTimeout(renderMenuElement, (i+1)*250);
 
 			menu.removeChild(menu.querySelector(".staticMenu"));
 
