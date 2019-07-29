@@ -1,0 +1,125 @@
+<!doctype html>
+
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		
+		<style>
+			@import url("https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap");
+			body {
+				font-family: "Roboto Mono", monospace;
+				font-size: 1.5vw;
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			a:link, a:visited {
+				color: black;
+			}
+
+			a:hover, a:active {
+				color: grey;
+			}
+
+			.decorated {
+				text-decoration: underline;
+			}
+
+			.hidden {
+				visibility: hidden;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		site is under construction
+
+		<br /><br />
+		
+		<span class="menu">
+
+			<span class="staticMenu">
+
+				<a href="">
+					[ <span class="decorated">blog</span> ]
+				</a>
+
+				<br />
+
+				<a href="https://github.com/denisnow">
+					[ <span class="decorated">repo</span> ]
+				</a>
+
+			</span>
+
+		</span>
+		
+	</body>
+
+	<script>
+
+		document.body.querySelector(".menu").querySelector(".staticMenu").classList.add("hidden");
+		
+		(renderMenu = function() {
+
+			var menu = document.body.querySelector(".menu");
+			var links = menu.querySelectorAll("a");
+
+			var renderMenuItem = function(name, link) {
+
+				var menuItemElement = document.createElement("div");
+
+				var beforeNameElement = document.createElement("span");
+				var nameElement = document.createElement("span");
+				var afterNameElement = document.createElement("span");
+
+				var linkElement =  document.createElement("a");
+
+				beforeNameElement.textContent = "[ ";
+				afterNameElement.textContent = " ]";
+
+				linkElement.text = name;
+				linkElement.href = link;
+				linkElement.classList.add("decorated");
+
+				menuItemElement.appendChild(beforeNameElement);
+				menuItemElement.appendChild(nameElement);
+				menuItemElement.appendChild(afterNameElement);
+
+				menu.insertBefore(menuItemElement, menu.querySelector(".staticMenu"));
+
+				for (var i = 1; i<name.length+1; i++) {
+					(function (i) {	
+						setTimeout(() => nameElement.innerText = name.slice(0, i), i*40);
+					})(i);
+
+					if (i===name.length) setTimeout(() => {
+						nameElement.innerText = "";
+						nameElement.appendChild(linkElement);
+					}, (i+2)*40);
+				}
+			}
+
+			for (var i=0; i<links.length; i++)
+				(function(name, link) {
+					setTimeout(
+						() => renderMenuItem(name, link)
+					,(i+1)*250)
+				})(links[i].querySelector(".decorated").textContent, links[i].href);
+
+
+			document.body.querySelector(".menu").removeChild(document.body.querySelector(".menu").querySelector(".staticMenu"));
+
+			delete renderMenu;
+
+		})();
+
+	</script>
+
+</html>
