@@ -77,21 +77,21 @@
 
 				var menuElementIndex = menuElementIndexCounter++;
 				var url = urls[menuElementIndex];
-				var menuItemName = url.querySelector("span").textContent;
+				var menuElementName = url.querySelector("span").textContent;
 				
 				var menuElement = document.createElement("div");
 
 				menu.appendChild(menuElement);
 
-				for (var i = 0; i < menuItemName.length+1; i++) {
+				for (var i = 0; i < menuElementName.length+1; i++) {
 
 					(function (i) {	
 
-						setTimeout(() => menuElement.innerText = "[ " + menuItemName.slice(0, i) + " ]", i*40);
+						setTimeout(() => menuElement.innerText = "[ " + menuElementName.slice(0, i) + " ]", i*40);
 
 					})(i);
 
-					if (i===menuItemName.length) setTimeout(() => {
+					if (i===menuElementName.length) setTimeout(() => {
 						
 						menuElement.innerText = "";
 						menuElement.appendChild(url);
@@ -101,7 +101,7 @@
 			}
 
 			for (var i=0; i < urls.length; i++)
-			
+
 				setTimeout(renderMenuElement, (i+1)*250);
 
 			menu.removeChild(menu.querySelector(".staticMenu"));
