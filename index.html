@@ -60,58 +60,60 @@
 			</span>
 
 		</span>
-		
-	</body>
 
-	<script>
+		<script>
 
-		(hideStaticMenu = function() {
+			(hideStaticMenu = function() {
 
-			var element = document.body.querySelector(".staticMenu");
-			
-			element.className += " hidden";
+				var staticitemElement = document.body.querySelector(".staticMenu");
 
-			delete hideStaticMenu;
-		})();
-		
-		(renderMenu = function() {
+				staticitemElement.className += " hidden";
 
-			var menu = document.body.querySelector(".menu");
-			var urls = menu.querySelectorAll("a");
-			var menuElementIndexCounter = 0;
+				delete hideStaticMenu;
+			})();
 
-			var renderMenuElement = function() {
+			(renderMenu = function() {
 
-				var menuElementIndex = menuElementIndexCounter++;
-				var url = urls[menuElementIndex];
-				var menuElementName = url.querySelector("span").textContent;
+				var menu = document.body.querySelector(".menu");
+				var urls = menu.querySelectorAll("a");
+				var menuItemIndexCounter = 0;
 
-				var menuElement = document.createElement("div");
+				var renderMenuItem = function() {
 
-				menu.appendChild(menuElement);
+					var itemIndex = menuItemIndexCounter++;
+					var url = urls[itemIndex];
+					var itemName = url.querySelector("span").textContent;
 
-				for (var i = 0; i < menuElementName.length+1; i++) {
+					var itemElement = document.createElement("div");
 
-					var renderDelayInterval = 50;
+					menu.appendChild(itemElement);
 
-					(function(i) {
-						setTimeout(function() {menuElement.innerText = "[ " + menuElementName.slice(0, i) + " ]"}, i*renderDelayInterval);
-					})(i);
+					for (var i = 0; i <= itemName.length; i++) {
 
-					if (i==menuElementName.length) {
-						setTimeout(function() {menuElement.replaceChild(url, menuElement.firstChild)}, (i+1)*renderDelayInterval);
+						var renderDelayInterval = 50;
+
+						var animateItem = function(charIndex) {
+							setTimeout(function() {itemElement.innerText = "[ " + itemName.slice(0, charIndex) + " ]"}, i*renderDelayInterval);
+						};
+
+						animateItem(i);
+
+						if (i==itemName.length) {
+							setTimeout(function() {itemElement.replaceChild(url, itemElement.firstChild)}, (i+1)*renderDelayInterval);
+						}
 					}
-				}
-			}
+				};
 
-			for (var i = 0; i < urls.length; i++) setTimeout(renderMenuElement, (i+1)*250);
+				for (var i = 0; i < urls.length; i++) setTimeout(renderMenuItem, (i+1)*250);
 
-			menu.removeChild(menu.querySelector(".staticMenu"));
+				menu.removeChild(menu.querySelector(".staticMenu"));
 
-			delete renderMenu;
+				delete renderMenu;
 
-		})();
+			})();
 
-	</script>
+		</script>
+
+	</body>
 
 </html>
