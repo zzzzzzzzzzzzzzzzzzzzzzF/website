@@ -63,14 +63,9 @@
 
 		<script>
 
-			(hideStaticMenu = function() {
+			staticMenu = document.body.querySelector(".staticMenu");
 
-				var staticMenu = document.body.querySelector(".staticMenu");
-
-				staticMenu.className += " hidden";
-
-				delete hideStaticMenu;
-			})();
+			staticMenu.className += " hidden";
 
 			(renderMenu = function() {
 
@@ -104,11 +99,12 @@
 
 				for (var i = 0; i < urls.length; i++) setTimeout(renderMenuItem, (i+1)*250);
 
-				menu.removeChild(menu.querySelector(".staticMenu"));
-
-				delete renderMenu;
+				menu.removeChild(staticMenu);
 
 			})();
+
+			delete renderMenu;
+			delete staticMenu;
 
 		</script>
 
