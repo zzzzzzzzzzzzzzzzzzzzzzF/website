@@ -65,18 +65,12 @@
 
 	<script>
 
-		//document.body.querySelector(".staticMenu").classList.add("hidden");
-
 		(hideStaticMenu = function() {
 
-			var element, addedClassName, arr;
+			var element = document.body.querySelector(".staticMenu");
+			var classNameToAdd = "hidden";
 
-			element = document.body.querySelector(".staticMenu");
-			addedClassName = "hidden";
-			arr = element.className.split(" ");
-			if (arr.indexOf(addedClassName) == -1) {
-				element.className += " " + addedClassName;
-			}
+			element.className += " " + classNameToAdd;
 
 			delete hideStaticMenu;
 		})();
