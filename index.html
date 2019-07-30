@@ -92,11 +92,9 @@
 
 						var renderDelayInterval = 50;
 
-						var animateItem = function(charIndex) {
+						(function(charIndex) {
 							setTimeout(function() {itemElement.innerText = "[ " + itemName.slice(0, charIndex) + " ]"}, i*renderDelayInterval);
-						};
-
-						animateItem(i);
+						})(i);
 
 						if (i==itemName.length) {
 							setTimeout(function() {itemElement.replaceChild(url, itemElement.firstChild)}, (i+1)*renderDelayInterval);
