@@ -65,7 +65,21 @@
 
 	<script>
 
-		document.body.querySelector(".staticMenu").classList.add("hidden");
+		//document.body.querySelector(".staticMenu").classList.add("hidden");
+
+		(hideStaticMenu = function() {
+
+			var element, addedClassName, arr;
+
+			element = document.body.querySelector(".staticMenu");
+			addedClassName = "hidden";
+			arr = element.className.split(" ");
+			if (arr.indexOf(addedClassName) == -1) {
+				element.className += " " + addedClassName;
+			}
+
+			delete hideStaticMenu;
+		})();
 		
 		(renderMenu = function() {
 
@@ -78,7 +92,7 @@
 				var menuElementIndex = menuElementIndexCounter++;
 				var url = urls[menuElementIndex];
 				var menuElementName = url.querySelector("span").textContent;
-				
+
 				var menuElement = document.createElement("div");
 
 				menu.appendChild(menuElement);
@@ -87,12 +101,12 @@
 
 					var renderDelayInterval = 50;
 
-					(function (i) {
-						setTimeout(() => menuElement.innerText = "[ " + menuElementName.slice(0, i) + " ]", i*renderDelayInterval);
+					(function(i) {
+						setTimeout(function() {menuElement.innerText = "[ " + menuElementName.slice(0, i) + " ]"}, i*renderDelayInterval);
 					})(i);
 
-					if (i===menuElementName.length) {
-						setTimeout(() => menuElement.replaceChild(url, menuElement.firstChild), (i+1)*renderDelayInterval);
+					if (i==menuElementName.length) {
+						setTimeout(function() {menuElement.replaceChild(url, menuElement.firstChild)}, (i+1)*renderDelayInterval);
 					}
 				}
 			}
