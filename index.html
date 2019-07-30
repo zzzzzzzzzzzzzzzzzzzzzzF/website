@@ -68,9 +68,8 @@
 		(hideStaticMenu = function() {
 
 			var element = document.body.querySelector(".staticMenu");
-			var classNameToAdd = "hidden";
-
-			element.className += " " + classNameToAdd;
+			
+			element.className += " hidden";
 
 			delete hideStaticMenu;
 		})();
