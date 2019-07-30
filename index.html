@@ -65,9 +65,9 @@
 
 			(hideStaticMenu = function() {
 
-				var staticItemElement = document.body.querySelector(".staticMenu");
+				var staticMenu = document.body.querySelector(".staticMenu");
 
-				staticItemElement.className += " hidden";
+				staticMenu.className += " hidden";
 
 				delete hideStaticMenu;
 			})();
@@ -84,20 +84,20 @@
 					var url = urls[itemIndex];
 					var itemName = url.querySelector("span").textContent;
 
-					var itemElement = document.createElement("div");
+					var item = document.createElement("div");
 
-					menu.appendChild(itemElement);
+					menu.appendChild(item);
 
 					for (var i = 0; i <= itemName.length; i++) {
 
 						var renderDelayInterval = 50;
 
 						(function(charIndex) {
-							setTimeout(function() {itemElement.innerText = "[ " + itemName.slice(0, charIndex) + " ]"}, i*renderDelayInterval);
+							setTimeout(function() {item.innerText = "[ " + itemName.slice(0, charIndex) + " ]"}, i*renderDelayInterval);
 						})(i);
 
 						if (i==itemName.length) {
-							setTimeout(function() {itemElement.replaceChild(url, itemElement.firstChild)}, (i+1)*renderDelayInterval);
+							setTimeout(function() {item.replaceChild(url, item.firstChild)}, (i+1)*renderDelayInterval);
 						}
 					}
 				};
