@@ -76,11 +76,11 @@
 
 				var menu = document.body.querySelector(".menu");
 				var urls = menu.querySelectorAll("a");
-				var menuItemIndexCounter = 0;
+				var indexCounter = 0;
 
 				var renderMenuItem = function() {
 
-					var itemIndex = menuItemIndexCounter++;
+					var itemIndex = indexCounter++;
 					var url = urls[itemIndex];
 					var itemName = url.querySelector("span").textContent;
 
