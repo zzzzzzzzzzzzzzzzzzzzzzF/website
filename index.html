@@ -97,7 +97,7 @@
 					}
 				};
 
-				for (var i = 0; i < urls.length; i++) setTimeout(renderMenuItem, (i+1)*250);
+				for (var i = 1; i <= urls.length; i++) setTimeout(renderMenuItem, i*250);
 
 				menu.removeChild(staticMenu);
 
