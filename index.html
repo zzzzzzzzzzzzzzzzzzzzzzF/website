@@ -92,7 +92,7 @@
 						})(i);
 
 						if (i==itemName.length) {
-							setTimeout(function() {item.replaceChild(url, item.firstChild)}, (i+1)*renderDelayInterval);
+							setTimeout(function() {item.replaceChild(url, item.firstChild)}, (++i)*renderDelayInterval);
 						}
 					}
 				};
